@@ -13,7 +13,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = student::all();
+        return view('student.index', compact('students'));
     }
 
     /**
@@ -21,7 +22,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -29,7 +30,10 @@ class StudentController extends Controller
      */
     public function store(StorestudentRequest $request)
     {
-        //
+        $student = student::create($request->validated());
+        $student->save();
+
+        return redirect()->route('student.index')->with('success', 'تم إضافة الطالب بنجاح!');
     }
 
     /**
@@ -37,7 +41,7 @@ class StudentController extends Controller
      */
     public function show(student $student)
     {
-        //
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -45,7 +49,7 @@ class StudentController extends Controller
      */
     public function edit(student $student)
     {
-        //
+        return view('student.edit', compact('student'));
     }
 
     /**
@@ -53,7 +57,9 @@ class StudentController extends Controller
      */
     public function update(UpdatestudentRequest $request, student $student)
     {
-        //
+        $student->update($request->validated());
+        $student->save();
+        return redirect()->route('student.index')->with('success', 'تم تحديث بيانات الطالب بنجاح!');
     }
 
     /**
@@ -61,6 +67,7 @@ class StudentController extends Controller
      */
     public function destroy(student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('student.index')->with('success', 'Student deleted successfully!');
     }
 }
