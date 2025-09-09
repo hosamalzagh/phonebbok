@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorestudentRequest;
 use App\Http\Requests\UpdatestudentRequest;
-use App\Models\student;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -13,7 +13,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = student::all();
+        $students = Student::all();
         return view('student.index', compact('students'));
     }
 
@@ -30,7 +30,7 @@ class StudentController extends Controller
      */
     public function store(StorestudentRequest $request)
     {
-        $student = student::create($request->validated());
+        $student = Student::create($request->validated());
         $student->save();
 
         return redirect()->route('student.index')->with('success', 'تم إضافة الطالب بنجاح!');
@@ -39,7 +39,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(student $student)
+    public function show(Student $student)
     {
         return view('student.show', compact('student'));
     }
@@ -47,7 +47,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(student $student)
+    public function edit(Student $student)
     {
         return view('student.edit', compact('student'));
     }
@@ -55,7 +55,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatestudentRequest $request, student $student)
+    public function update(UpdatestudentRequest $request, Student $student)
     {
         $student->update($request->validated());
         $student->save();
@@ -65,7 +65,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(student $student)
+    public function destroy(Student $student)
     {
         $student->delete();
         return redirect()->route('student.index')->with('success', 'Student deleted successfully!');

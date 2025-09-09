@@ -1,16 +1,25 @@
 <?php
 
-use App\Http\Controllers\StudentController as StudentControllerAlias;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::get('student', [StudentControllerAlias::class ,'index' ])->name('student.index');
-Route::get('student/create', [StudentControllerAlias::class ,'create' ])->name('student.create');
-Route::post('student', [StudentControllerAlias::class ,'store' ])->name('student.store');
-Route::get('student/{student}', [StudentControllerAlias::class ,'show' ])->name('student.show');
-Route::get('student/{student}/edit', [StudentControllerAlias::class ,'edit' ])->name('student.edit');
-Route::put('student/{student}', [StudentControllerAlias::class ,'update' ])->name('student.update');
-Route::delete('student/{student}', [StudentControllerAlias::class ,'destroy' ])->name('student.destroy');
+Route::get('teacher', [TeacherController::class, 'index'])->name('teacher.index');
+Route::get('teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+Route::post('teacher', [TeacherController::class, 'store'])->name('teacher.store');
+Route::get('teacher/{teacher}', [TeacherController::class, 'show'])->name('teacher.show');
+Route::get('teacher/{teacher}/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
+Route::put('teacher/{teacher}', [TeacherController::class, 'update'])->name('teacher.update');
+Route::delete('teacher/{teacher}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+
+Route::get('student', [StudentController::class ,'index' ])->name('student.index');
+Route::get('student/create', [StudentController::class ,'create' ])->name('student.create');
+Route::post('student', [StudentController::class ,'store' ])->name('student.store');
+Route::get('student/{student}', [StudentController::class ,'show' ])->name('student.show');
+Route::get('student/{student}/edit', [StudentController::class ,'edit' ])->name('student.edit');
+Route::put('student/{student}', [StudentController::class ,'update' ])->name('student.update');
+Route::delete('student/{student}', [StudentController::class ,'destroy' ])->name('student.destroy');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
