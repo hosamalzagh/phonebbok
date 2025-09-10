@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,14 @@ Route::get('student/{student}', [StudentController::class ,'show' ])->name('stud
 Route::get('student/{student}/edit', [StudentController::class ,'edit' ])->name('student.edit');
 Route::put('student/{student}', [StudentController::class ,'update' ])->name('student.update');
 Route::delete('student/{student}', [StudentController::class ,'destroy' ])->name('student.destroy');
+
+Route::get('group', [GroupController::class, 'index'])->name('group.index');
+Route::get('group/create', [GroupController::class, 'create'])->name('group.create');
+Route::post('group', [GroupController::class, 'store'])->name('group.store');
+Route::get('group/{group}', [GroupController::class, 'show'])->name('group.show');
+Route::get('group/{group}/edit', [GroupController::class, 'edit'])->name('group.edit');
+Route::put('group/{group}', [GroupController::class, 'update'])->name('group.update');
+Route::delete('group/{group}', [GroupController::class, 'destroy'])->name('group.destroy');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
