@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('mobile');
             $table->integer('age');
             $table->string('gender');
+            $table->foreignIdFor(\App\Models\Group::class)->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
