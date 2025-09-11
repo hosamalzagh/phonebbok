@@ -131,7 +131,7 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors @error('group_id') border-red-500 @enderror">
                         <option value="">بدون مجموعة</option>
                         @foreach($groups as $group)
-                            <option value="{{ $group->id }}" @selected(old('group_id') == $group->id)>{{ $group->name }}</option>
+                            <option value="{{ $group->id }}" @selected(old('group_id') == $group->id)>{{ $group->id }} - {{ $group->name }}</option>
                         @endforeach
                     </select>
                     @error('group_id')

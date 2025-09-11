@@ -24,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $groups = Group::query()->select('id', 'name')->orderBy('name')->get();
+        $groups = Group::select('id', 'name')->get();
 
         return view('student.create', compact('groups'));
     }
@@ -45,6 +45,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        $student->load('group');
         return view('student.show', compact('student'));
     }
 
@@ -53,7 +54,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        $groups = Group::query()->select('id', 'name')->orderBy('name')->get();
+        $groups = Group::select('id', 'name')->orderBy('name')->get();
 
         return view('student.edit', compact('student', 'groups'));
     }
@@ -64,7 +65,6 @@ class StudentController extends Controller
     public function update(UpdatestudentRequest $request, Student $student)
     {
         $student->update($request->validated());
-        $student->save();
 
         return redirect()->route('student.index')->with('success', 'تم تحديث بيانات الطالب بنجاح!');
     }

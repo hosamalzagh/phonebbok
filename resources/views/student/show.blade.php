@@ -1,5 +1,4 @@
 @extends('layout.app')
-
 @section('content')
 <div class="min-h-screen bg-gray-50 py-8" dir="rtl">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,6 +44,18 @@
             <!-- Student Details -->
             <div class="px-6 py-6">
                 <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+                    <div class="sm:col-span-2">
+                        <dt class="text-sm font-medium text-gray-500 mb-1">الصف</dt>
+                        <dd class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md">
+                            {{ $student->group->level }}
+                        </dd>
+                    </div>
+                    <div class="">
+                        <dt class="text-sm font-medium text-gray-500 mb-1">اسم المجموعة</dt>
+                        <dd class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md">
+                            {{ $student->group->name }}
+                        </dd>
+                    </div>
                     <div>
                         <dt class="text-sm font-medium text-gray-500 mb-1">الاسم</dt>
                         <dd class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md">{{ $student->name }}</dd>
@@ -67,7 +78,7 @@
                         </dd>
                     </div>
 
-                    <div class="sm:col-span-2">
+                    <div class="">
                         <dt class="text-sm font-medium text-gray-500 mb-1">تاريخ التسجيل</dt>
                         <dd class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md">
                             {{ $student->created_at->format('Y/m/d - H:i') }}
