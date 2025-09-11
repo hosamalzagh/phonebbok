@@ -26,6 +26,7 @@ class StorestudentRequest extends FormRequest
             'mobile' => 'required|string|max:255',
             'age' => 'required|integer|min:13|max:20',
             'gender' => 'required|in:male,female',
+            'group_id' => 'nullable|exists:groups,id',
         ];
     }
 
@@ -49,6 +50,7 @@ class StorestudentRequest extends FormRequest
             'age.max' => 'يجب ألا يزيد العمر عن 20 سنة',
             'gender.required' => 'الجنس مطلوب',
             'gender.in' => 'الجنس المحدد غير صالح',
+            'group_id.exists' => 'المجموعة المحددة غير موجودة',
         ];
     }
 }

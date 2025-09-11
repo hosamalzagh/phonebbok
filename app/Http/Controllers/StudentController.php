@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorestudentRequest;
 use App\Http\Requests\UpdatestudentRequest;
+use App\Models\Group;
 use App\Models\Student;
 
 class StudentController extends Controller
@@ -14,6 +15,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
+
         return view('student.index', compact('students'));
     }
 
@@ -22,7 +24,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $groups = Group::query()->select('id', 'name')->orderBy('name')->get();
+
+        return view('student.create', compact('groups'));
     }
 
     /**
@@ -49,7 +53,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('student.edit', compact('student'));
+        $groups = Group::query()->select('id', 'name')->orderBy('name')->get();
+
+        return view('student.edit', compact('student', 'groups'));
     }
 
     /**
@@ -59,6 +65,7 @@ class StudentController extends Controller
     {
         $student->update($request->validated());
         $student->save();
+
         return redirect()->route('student.index')->with('success', 'تم تحديث بيانات الطالب بنجاح!');
     }
 
@@ -68,6 +75,7 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
+
         return redirect()->route('student.index')->with('success', 'Student deleted successfully!');
     }
 }

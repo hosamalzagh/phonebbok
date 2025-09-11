@@ -124,6 +124,21 @@
                     @enderror
                 </div>
 
+                <!-- Group Field -->
+                <div>
+                    <label for="group_id" class="block text-sm font-medium text-gray-700 mb-1">المجموعة</label>
+                    <select name="group_id" id="group_id"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors @error('group_id') border-red-500 @enderror">
+                        <option value="">بدون مجموعة</option>
+                        @foreach($groups as $group)
+                            <option value="{{ $group->id }}" @selected(old('group_id') == $group->id)>{{ $group->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('group_id')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Buttons -->
                 <div class="flex items-center justify-end space-x-reverse space-x-3 pt-6 border-t border-gray-200">
                     <a href="{{ route('student.index') }}"

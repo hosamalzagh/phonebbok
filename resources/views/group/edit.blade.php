@@ -131,6 +131,21 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
 
+                    <!-- Teacher Field -->
+                    <div>
+                        <label for="teacher_id" class="block text-sm font-medium text-gray-700 mb-1">المعلم</label>
+                        <select name="teacher_id" id="teacher_id"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors @error('teacher_id') border-red-500 @enderror">
+                            <option value="">بدون معلم</option>
+                            @foreach($teachers as $teacher)
+                                <option value="{{ $teacher->id }}" @selected(old('teacher_id', $group->teacher_id) == $teacher->id)>{{ $teacher->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('teacher_id')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <!-- Buttons -->
                     <div class="flex items-center justify-end space-x-reverse space-x-3 pt-6 border-t border-gray-200">
                         <a href="{{ route('group.show', $group) }}"

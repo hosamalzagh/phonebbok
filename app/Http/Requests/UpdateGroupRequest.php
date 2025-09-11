@@ -28,6 +28,7 @@ class UpdateGroupRequest extends FormRequest
             'level' => 'nullable|string|max:100',
             'section' => 'nullable|string|max:100',
             'is_active' => 'boolean',
+            'teacher_id' => 'nullable|exists:teachers,id',
         ];
     }
 
@@ -45,6 +46,7 @@ class UpdateGroupRequest extends FormRequest
             'capacity.max' => 'السعة يجب أن تكون 100 كحد أقصى',
             'level.max' => 'المستوى يجب أن يكون أقل من 100 حرف',
             'section.max' => 'الشعبة يجب أن تكون أقل من 100 حرف',
+            'teacher_id.exists' => 'المعلم المحدد غير موجود',
         ];
     }
 }

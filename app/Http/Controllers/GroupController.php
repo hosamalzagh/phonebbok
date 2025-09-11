@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
+use App\Models\Teacher;
 
 class GroupController extends Controller
 {
@@ -14,6 +15,7 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::all();
+
         return view('group.index', compact('groups'));
     }
 
@@ -22,7 +24,9 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create');
+        $teachers = Teacher::query()->select('id', 'name')->orderBy('name')->get();
+
+        return view('group.create', compact('teachers'));
     }
 
     /**
@@ -49,7 +53,9 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('group.edit', compact('group'));
+        $teachers = Teacher::query()->select('id', 'name')->orderBy('name')->get();
+
+        return view('group.edit', compact('group', 'teachers'));
     }
 
     /**
@@ -59,6 +65,7 @@ class GroupController extends Controller
     {
         $group->update($request->validated());
         $group->save();
+
         return redirect()->route('group.index')->with('success', 'تم تحديث بيانات المجموعة بنجاح!');
     }
 
@@ -68,6 +75,7 @@ class GroupController extends Controller
     public function destroy(Group $group)
     {
         $group->delete();
+
         return redirect()->route('group.index')->with('success', 'تم حذف المجموعة بنجاح!');
     }
 }
