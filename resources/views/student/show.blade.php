@@ -86,6 +86,64 @@
                     </div>
                 </dl>
             </div>
+            <!-- Payments Section -->
+            <div class="px-6 pb-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">المدفوعات</h3>
+
+                @php
+                    $payments = $student->paids->sortByDesc('created_at');
+                    $totalPaid = $payments->sum('amount');
+                @endphp
+
+                @if($payments->isEmpty())
+                    <div class="bg-gray-50 text-gray-600 text-sm px-4 py-3 rounded-md">
+                        لا توجد مدفوعات حتى الآن.
+                    </div>
+                @else
+                    <div class="overflow-x-auto bg-white border border-gray-200 rounded-lg">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-gray-100 text-gray-600">
+                                <tr>
+                                    <th class="px-4 py-2 text-right font-medium">#</th>
+                                    <th class="px-4 py-2 text-right font-medium">الشهر</th>
+                                    <th class="px-4 py-2 text-right font-medium">المبلغ</th>
+                                    <th class="px-4 py-2 text-right font-medium">التاريخ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                @foreach($payments as $index => $paid)
+                                    <tr>
+                                        <td class="px-4 py-2 text-gray-900">{{ $index + 1 }}</td>
+                                        <td class="px-4 py-2 text-gray-900">
+                                            {{ $paid->month }}
+                                        </td>
+                                        <td class="px-4 py-2 text-gray-900">
+                                            {{ number_format($paid->amount) }}
+                                        </td>
+                                        <td class="px-4 py-2 text-gray-500">
+                                            {{ $paid->created_at->format('Y/m/d - H:i') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot class="bg-gray-50">
+                                <tr>
+                                    <td colspan="2" class="px-4 py-2 text-right font-medium text-gray-700">إجمالي المدفوع</td>
+                                    <td class="px-4 py-2 font-bold text-gray-900">{{ number_format($totalPaid) }}</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                        <div class="bg-green-50 border border-green-200 rounded-md p-3">
+                            <div class="text-xs text-green-700">المدفوع</div>
+                            <div class="text-lg font-bold text-green-900">{{ number_format($totalPaid) }}</div>
+                        </div>
+                    </div>
+                @endif
+            </div>
 
             <!-- Actions -->
             <div class="bg-gray-50 px-6 py-4">

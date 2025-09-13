@@ -6,6 +6,7 @@ use App\Http\Requests\StorestudentRequest;
 use App\Http\Requests\UpdatestudentRequest;
 use App\Models\Group;
 use App\Models\Student;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -45,7 +46,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        $student->load('group');
+        $student->load('group', 'paids');
+
         return view('student.show', compact('student'));
     }
 
@@ -77,5 +79,25 @@ class StudentController extends Controller
         $student->delete();
 
         return redirect()->route('student.index')->with('success', 'Student deleted successfully!');
+    }
+
+    public function paid(Student $student)
+    {
+        return view('student.paid', compact('student'));
+
+    }
+
+    public function storePaid(Student $student, Request $request)
+    {
+        $data = $request->validate([
+            'amount' => ['required', 'numeric', 'min:0'],
+            'month' => ['required', 'in:8,9,10,11,12,1,2,3,4,5,6,7'],
+        ]);
+
+        $student->paids()->create($data);
+
+        return redirect()
+            ->route('student.index')
+            ->with('success', 'تم تسجيل الدفعة بنجاح');
     }
 }

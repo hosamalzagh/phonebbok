@@ -14,13 +14,15 @@ Route::get('teacher/{teacher}/edit', [TeacherController::class, 'edit'])->name('
 Route::put('teacher/{teacher}', [TeacherController::class, 'update'])->name('teacher.update');
 Route::delete('teacher/{teacher}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
 
-Route::get('student', [StudentController::class ,'index' ])->name('student.index');
-Route::get('student/create', [StudentController::class ,'create' ])->name('student.create');
-Route::post('student', [StudentController::class ,'store' ])->name('student.store');
-Route::get('student/{student}', [StudentController::class ,'show' ])->name('student.show');
-Route::get('student/{student}/edit', [StudentController::class ,'edit' ])->name('student.edit');
-Route::put('student/{student}', [StudentController::class ,'update' ])->name('student.update');
-Route::delete('student/{student}', [StudentController::class ,'destroy' ])->name('student.destroy');
+Route::get('student', [StudentController::class, 'index'])->name('student.index');
+Route::get('student/create', [StudentController::class, 'create'])->name('student.create');
+Route::post('student', [StudentController::class, 'store'])->name('student.store');
+Route::get('student/{student}', [StudentController::class, 'show'])->name('student.show');
+Route::get('student/{student}/edit', [StudentController::class, 'edit'])->name('student.edit');
+Route::put('student/{student}', [StudentController::class, 'update'])->name('student.update');
+Route::delete('student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
+Route::get('student/{student}/paid', [StudentController::class, 'paid'])->name('student.paid');
+Route::post('student/{student}/paid', [StudentController::class, 'storePaid'])->name('student.storePaid');
 
 Route::get('group', [GroupController::class, 'index'])->name('group.index');
 Route::get('group/create', [GroupController::class, 'create'])->name('group.create');
