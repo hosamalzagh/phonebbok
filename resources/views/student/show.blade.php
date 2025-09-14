@@ -47,13 +47,13 @@
                     <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500 mb-1">الصف</dt>
                         <dd class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md">
-                            {{ $student->group->level }}
+                            {{ $student->group ? $student->group->level : 'غير محدد' }}
                         </dd>
                     </div>
                     <div class="">
                         <dt class="text-sm font-medium text-gray-500 mb-1">اسم المجموعة</dt>
                         <dd class="text-sm text-gray-900 bg-gray-50 px-3 py-2 rounded-md">
-                            {{ $student->group->name }}
+                            {{ $student->group ? $student->group->name : 'غير محدد' }}
                         </dd>
                     </div>
                     <div>

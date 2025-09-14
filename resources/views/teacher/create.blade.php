@@ -3,25 +3,6 @@
 @section('content')
     <div class="min-h-screen bg-gray-50 py-8" dir="rtl">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Navigation -->
-            <div class="mb-6">
-                <nav class="flex space-x-reverse space-x-4">
-                    <a href="{{ route('student.index') }}"
-                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                        <svg class="inline h-4 w-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                        </svg>
-                        الطلاب
-                    </a>
-                    <a href="{{ route('teacher.index') }}"
-                       class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                        <svg class="inline h-4 w-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
-                        </svg>
-                        المعلمين
-                    </a>
-                </nav>
-            </div>
 
             <!-- Header -->
             <div class="mb-8">
@@ -81,15 +62,8 @@
                     </div>
 
                     <!-- Email Field -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
-                        <input type="email" name="email" id="email"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors @error('email') border-red-500 @enderror"
-                               value="{{ old('email') }}" placeholder="أدخل البريد الإلكتروني">
-                        @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
+
+
 
                     <!-- Mobile Field -->
                     <div>
