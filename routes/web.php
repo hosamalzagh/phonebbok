@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -31,6 +32,10 @@ Route::get('group/{group}', [GroupController::class, 'show'])->name('group.show'
 Route::get('group/{group}/edit', [GroupController::class, 'edit'])->name('group.edit');
 Route::put('group/{group}', [GroupController::class, 'update'])->name('group.update');
 Route::delete('group/{group}', [GroupController::class, 'destroy'])->name('group.destroy');
+
+// Attendance
+Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+Route::post('attendance', [AttendanceController::class, 'store'])->name('attendance.store');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
