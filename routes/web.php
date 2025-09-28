@@ -13,7 +13,7 @@ Route::get('/', function () {
 })->name('home');
 
 // Protected application routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Teachers
     Route::get('teacher', [TeacherController::class, 'index'])->name('teacher.index');
     Route::get('teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
@@ -22,6 +22,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('teacher/{teacher}/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
     Route::put('teacher/{teacher}', [TeacherController::class, 'update'])->name('teacher.update');
     Route::delete('teacher/{teacher}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+
+
+        Route::get('trel' ,function(){
+
+        $allteacher = \App\Models\Teacher::where('id',5)->with('groups')->get()->first();
+
+        $foster = \App\Models\Teacher::with('groups')->find(5);
+
+        dd($allteacher , $foster);
+    });
 
     // Students
     Route::get('student', [StudentController::class, 'index'])->name('student.index');
