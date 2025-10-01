@@ -4,6 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -12,7 +13,7 @@ Route::get('/', function () {
     return redirect()->route('student.index');
 })->name('home');
 
-// Protected application routes
+// Protected application routesß
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Teachers
     Route::get('teacher', [TeacherController::class, 'index'])->name('teacher.index');
@@ -24,13 +25,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('teacher/{teacher}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
 
 
-        Route::get('trel' ,function(){
-
-        $allteacher = \App\Models\Teacher::where('id',5)->with('groups')->get()->first();
-
-        $foster = \App\Models\Teacher::with('groups')->find(5);
-
-        dd($allteacher , $foster);
+        Route::get('t' ,function(){
+        $teacher = Teacher::with(['groups' ,'attendances'])->find(5);
+        $groups = \App\Models\Group::get();
+        dd($teacher->groups->implode('name', ', ') ,
+            $teacher->groups->count() ,
+            $groups->implode('level',' '),
+            $groups->implode('name',' '),
+            $groups->count(),
+            $teacher
+        );
     });
 
     // Students
