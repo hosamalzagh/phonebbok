@@ -37,6 +37,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         );
     });
 
+        Route::get('ty/{id}',[TeacherController::class, 'ty']);
+
     // Students
     Route::get('student', [StudentController::class, 'index'])->name('student.index');
     Route::get('student/create', [StudentController::class, 'create'])->name('student.create');

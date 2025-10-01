@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreteacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
+use App\Models\Group;
 use App\Models\Teacher;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
@@ -69,5 +71,11 @@ class TeacherController extends Controller
     {
         $teacher->delete();
         return redirect()->route('teacher.index')->with('success', 'تم حذف المعلم بنجاح!');
+    }
+
+    public function ty($id)
+    {
+        $group = Group::find($id);
+        dd($group->name);
     }
 }
