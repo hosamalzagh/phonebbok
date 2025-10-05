@@ -75,7 +75,18 @@ class TeacherController extends Controller
 
     public function ty($id)
     {
-        $group = Group::find($id);
-        dd($group->name);
+        $group = Group::findOrFail($id);
+        dd($group);
+    }
+
+    public function allgroups()
+    {
+        dd($group);
+        $group = Group::where('is_active' ,1)->get()->random();
+        $group = Group::where('is_active' ,1)->get()->take(1);
+        $group = Group::where('is_active' ,1)->limit(2)->get();
+
+
+
     }
 }

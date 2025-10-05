@@ -38,6 +38,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     });
 
         Route::get('ty/{id}',[TeacherController::class, 'ty']);
+        Route::get('allgroups',[TeacherController::class, 'allgroups']);
 
     // Students
     Route::get('student', [StudentController::class, 'index'])->name('student.index');
