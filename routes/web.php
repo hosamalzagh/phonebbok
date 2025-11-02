@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
@@ -9,8 +10,9 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 // Home route (used for logout redirect and entry point)
-Route::get('/', function () {
-    return redirect()->route('student.index');
+Route::get('/mr', function () {
+
+
 })->name('home');
 
 // Protected application routesß
@@ -25,23 +27,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('teacher/{teacher}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
 
 
-        Route::get('t' ,function(){
-        $teacher = Teacher::with(['groups' ,'attendances'])->find(5);
-        $groups = \App\Models\Group::get();
-        dd($teacher->groups->implode('name', ', ') ,
-            $teacher->groups->count() ,
-            $groups->implode('level',' '),
-            $groups->implode('name',' '),
-            $groups->count(),
-            $teacher
-        );
-    });
-
-        Route::get('ty/{id}',[TeacherController::class, 'ty']);
-        Route::get('allgroups',[TeacherController::class, 'allgroups']);
-
+    Route::get('admin',[AdminController::class ,'index'])->name('admin.index');
+    Route::get('admin/{teacher}', [AdminController::class, 'show'])->name('admin.show');
     // Students
     Route::get('student', [StudentController::class, 'index'])->name('student.index');
+    Route::get('student/paginate', [StudentController::class, 'index'])->name('student.paginate');
     Route::get('student/create', [StudentController::class, 'create'])->name('student.create');
     Route::post('student', [StudentController::class, 'store'])->name('student.store');
     Route::get('student/{student}', [StudentController::class, 'show'])->name('student.show');
